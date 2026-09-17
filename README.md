@@ -70,9 +70,9 @@ Locate `<section id="collections">` in `index.html`. You can customize deliverab
 ### 3. Updating WhatsApp Number:
 In `main.js`, update the constant at the top:
 ```javascript
-const CINEADDICT_WHATSAPP = '918888888888'; // Replace with your 10-digit WhatsApp number (with country code)
+const CINEADDICT_WHATSAPP = '917385229599'; // Replace with your 10-digit WhatsApp number (with country code)
 ```
-And search & replace `918888888888` in `index.html` with your actual WhatsApp business number.
+And search & replace `917385229599` in `index.html` with your actual WhatsApp business number.
 
 ---
 

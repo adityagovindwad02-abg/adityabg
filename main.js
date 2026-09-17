@@ -15,7 +15,7 @@
   const LERP_DAMPING = 0.12;
   const isMobileClient = window.innerWidth <= 768 || ('ontouchstart' in window);
   const CONCURRENT_LOAD_LIMIT = isMobileClient ? 4 : 8;
-  const CINEADDICT_WHATSAPP = '918888888888'; // Primary Studio Booking Line
+  const CINEADDICT_WHATSAPP = '917385229599'; // Primary Studio Booking Line (+91 73852 29599)
 
   function getFrameUrl(index) {
     const padded = String(index).padStart(5, '0');
