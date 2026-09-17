@@ -12,7 +12,8 @@
   const TOTAL_FRAMES = 240;
   const FRAME_BASE_PATH = 'video_frames_24fps_png/frame_';
   const LERP_DAMPING = 0.12; // Butter-smooth damping factor
-  const CONCURRENT_LOAD_LIMIT = 8; // Concurrency limit for background image preloading
+  const isMobileClient = window.innerWidth <= 768 || ('ontouchstart' in window);
+  const CONCURRENT_LOAD_LIMIT = isMobileClient ? 4 : 8; // Friendly to mobile data & bandwidth
 
   function getFrameUrl(index) {
     const padded = String(index).padStart(5, '0');
@@ -33,6 +34,8 @@
   const backToTopBtn = document.getElementById('back-to-top');
   const menuToggle = document.getElementById('menu-toggle');
   const navMenu = document.getElementById('nav-menu');
+  const mobileBackdrop = document.getElementById('mobile-backdrop');
+  const mobileNavClose = document.getElementById('mobile-nav-close');
 
   // Animation Engine State
   const images = new Array(TOTAL_FRAMES + 1);
@@ -47,7 +50,10 @@
   // 2. CANVAS RESPONSIVE & COVER ENGINE
   // ==========================================
   function resizeCanvas() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const isMobile = window.innerWidth <= 768;
+    // Clamping DPR to 1.25 on mobile keeps frames razor-sharp while reducing mobile VRAM by 60%
+    const maxDpr = isMobile ? 1.25 : 1.75;
+    const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
     canvas.width = Math.round(window.innerWidth * dpr);
     canvas.height = Math.round(window.innerHeight * dpr);
 
@@ -57,6 +63,9 @@
   }
 
   window.addEventListener('resize', resizeCanvas, { passive: true });
+  window.addEventListener('orientationchange', () => {
+    setTimeout(resizeCanvas, 150);
+  }, { passive: true });
 
   function drawCoverImage(img) {
     if (!img || !img.complete || img.naturalWidth === 0) return;
@@ -278,20 +287,49 @@
       });
     }
 
-    // Mobile menu toggle
-    if (menuToggle && navMenu) {
-      menuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('open');
+    // Mobile Navigation Drawer Controller
+    function toggleMobileMenu(forceState) {
+      if (!navMenu) return;
+      const isOpen = forceState !== undefined ? forceState : !navMenu.classList.contains('open');
+      
+      navMenu.classList.toggle('open', isOpen);
+      if (menuToggle) {
+        menuToggle.classList.toggle('open', isOpen);
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      }
+      if (mobileBackdrop) {
+        mobileBackdrop.classList.toggle('open', isOpen);
+      }
+      document.body.classList.toggle('menu-open', isOpen);
+    }
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMobileMenu();
       });
+    }
+
+    if (mobileNavClose) {
+      mobileNavClose.addEventListener('click', () => toggleMobileMenu(false));
+    }
+
+    if (mobileBackdrop) {
+      mobileBackdrop.addEventListener('click', () => toggleMobileMenu(false));
     }
 
     // Close mobile menu on link click
     navLinks.forEach((link) => {
       link.addEventListener('click', () => {
-        if (navMenu && navMenu.classList.contains('open')) {
-          navMenu.classList.remove('open');
-        }
+        toggleMobileMenu(false);
       });
+    });
+
+    // Close on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu && navMenu.classList.contains('open')) {
+        toggleMobileMenu(false);
+      }
     });
   }
 
@@ -408,6 +446,19 @@
         const title = wrap.getAttribute('data-title');
         const type = wrap.getAttribute('data-type');
         openModal(src, title, type);
+      });
+    });
+
+    document.querySelectorAll('.play-action-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const wrap = btn.closest('.project-media-wrap');
+        if (wrap) {
+          const src = wrap.getAttribute('data-src');
+          const title = wrap.getAttribute('data-title');
+          const type = wrap.getAttribute('data-type');
+          openModal(src, title, type);
+        }
       });
     });
 
