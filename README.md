@@ -21,7 +21,7 @@
   1. `HERO`: Pune studio label, *YOUR WEDDING. YOUR STORY. YOUR FILM.*, dual CTAs.
   2. `TRUST NUMBERS`: 300+ Clients, 350+ Projects, 10+ Years, 4.9/5 Rating.
   3. `BRAND INTRO`: The unscripted moments narrative (*Every Wedding Has A Story*).
-  4. `FEATURED WEDDING FILM`: 16:9 cinema player showcasing Karan & Sneha royal wedding.
+  4. `FEATURED WEDDING FILM`: 16:9 cinema player showcasing Ananya & Siddharth romance film.
   5. `SERVICES`: 6 core disciplines (Films, Photos, Pre-Wedding, Engagement, Drone, Social Reels).
   6. `PORTFOLIO`: Stories We've Told with category filters (`All`, `Weddings`, `Pre-Weddings`, `Reels`, `Photos`).
   7. `PHOTOGRAPHY`: *Frames That Feel Alive* editorial gallery.
