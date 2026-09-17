@@ -362,12 +362,17 @@
         video.controls = true;
         video.autoplay = true;
         video.playsInline = true;
+        video.setAttribute('controlsList', 'nodownload nofullscreen noremoteplayback');
+        video.setAttribute('disablePictureInPicture', 'true');
+        video.oncontextmenu = (e) => { e.preventDefault(); return false; };
         modalContainer.appendChild(video);
       } else {
         const img = document.createElement('img');
         img.className = 'modal-image-view';
         img.src = src;
         img.alt = title || 'Photography Frame';
+        img.oncontextmenu = (e) => { e.preventDefault(); return false; };
+        img.ondragstart = (e) => { e.preventDefault(); return false; };
         modalContainer.appendChild(img);
       }
 
@@ -501,7 +506,143 @@
   }
 
   // ==========================================
-  // 10. BOOTSTRAP
+  // 10. CONTENT PROTECTION & ANTI-THEFT SECURITY
+  // ==========================================
+  function initContentSecurity() {
+    // 1. Create luxury protection toast
+    let toast = document.getElementById('cine-protection-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'cine-protection-toast';
+      toast.className = 'cine-protection-toast';
+      toast.innerHTML = `
+        <span class="lock-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </span>
+        <span class="toast-message">Protected Content · © CineAddict Studios</span>
+      `;
+      document.body.appendChild(toast);
+    }
+
+    let toastTimeout = null;
+    function showProtectionToast(message) {
+      if (!toast) return;
+      const msgSpan = toast.querySelector('.toast-message');
+      if (msgSpan && message) msgSpan.textContent = message;
+      toast.classList.add('show');
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // 2. Disable Right-Click Context Menu on media & portfolio
+    document.addEventListener('contextmenu', (e) => {
+      const isMediaTarget = e.target.closest('img, video, canvas, .project-card, .gallery-photo-item, .featured-film-card, #media-modal');
+      if (isMediaTarget || e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO' || e.target.tagName === 'CANVAS') {
+        e.preventDefault();
+        showProtectionToast('🔒 Protected Work · Right-click downloading is disabled');
+        return false;
+      }
+    });
+
+    // 3. Disable Dragging of Images & Videos
+    document.addEventListener('dragstart', (e) => {
+      if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO' || e.target.closest('.project-media-wrap, .gallery-photo-item, .featured-film-card')) {
+        e.preventDefault();
+        return false;
+      }
+    });
+
+    // 4. Disable DevTools, Save, and Print Shortcuts
+    window.addEventListener('keydown', (e) => {
+      const key = e.key.toLowerCase();
+      const isCmdOrCtrl = e.metaKey || e.ctrlKey;
+
+      // F12
+      if (e.key === 'F12') {
+        e.preventDefault();
+        showProtectionToast('🔒 Developer inspection is restricted');
+        return false;
+      }
+
+      // Cmd/Ctrl + Shift + I/J/C (DevTools)
+      if (isCmdOrCtrl && e.shiftKey && (key === 'i' || key === 'j' || key === 'c')) {
+        e.preventDefault();
+        showProtectionToast('🔒 Source inspection is restricted');
+        return false;
+      }
+
+      // Cmd/Ctrl + U (View Source)
+      if (isCmdOrCtrl && key === 'u') {
+        e.preventDefault();
+        showProtectionToast('🔒 View source is restricted');
+        return false;
+      }
+
+      // Cmd/Ctrl + S (Save Page)
+      if (isCmdOrCtrl && key === 's') {
+        e.preventDefault();
+        showProtectionToast('🔒 Content saving is restricted · © CineAddict');
+        return false;
+      }
+
+      // Cmd/Ctrl + P (Print)
+      if (isCmdOrCtrl && key === 'p') {
+        e.preventDefault();
+        showProtectionToast('🔒 Printing is restricted · © CineAddict');
+        return false;
+      }
+
+      // macOS Screenshot Shortcut Detection (Cmd + Shift + 3 / 4 / 5)
+      if (e.metaKey && e.shiftKey && ['3', '4', '5'].includes(key)) {
+        triggerScreenshotShield();
+      }
+    });
+
+    // 5. Windows PrintScreen Key Detection
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'PrintScreen') {
+        triggerScreenshotShield();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText('');
+        }
+      }
+    });
+
+    // 6. Screenshot / Window Blur Protection
+    let shieldTimer = null;
+    function triggerScreenshotShield() {
+      document.body.classList.add('screenshot-shield');
+      showProtectionToast('🔒 Screenshot Protected · © CineAddict Studios');
+      if (shieldTimer) clearTimeout(shieldTimer);
+      shieldTimer = setTimeout(() => {
+        document.body.classList.remove('screenshot-shield');
+      }, 1200);
+    }
+
+    // Temporary protective blur when window loses focus during screenshot snippet
+    window.addEventListener('blur', () => {
+      document.body.classList.add('screenshot-shield');
+    });
+
+    window.addEventListener('focus', () => {
+      document.body.classList.remove('screenshot-shield');
+    });
+
+    // 7. Enforce nodownload on all video tags in DOM
+    document.querySelectorAll('video').forEach((vid) => {
+      vid.setAttribute('controlsList', 'nodownload nofullscreen noremoteplayback');
+      vid.setAttribute('disablePictureInPicture', 'true');
+      vid.oncontextmenu = (e) => { e.preventDefault(); return false; };
+    });
+  }
+
+  // ==========================================
+  // 11. BOOTSTRAP
   // ==========================================
   function init() {
     resizeCanvas();
@@ -509,6 +650,7 @@
     initPortfolio();
     initFAQ();
     initEnquiryForm();
+    initContentSecurity();
     if (ctx) {
       requestAnimationFrame(updateAnimation);
       loadAllFrames();

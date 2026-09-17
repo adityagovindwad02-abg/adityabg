@@ -2484,3 +2484,106 @@ body::before {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   CONTENT PROTECTION & ANTI-THEFT SECURITY SUITE
+   © CineAddict Studios — Proprietary Media Protection
+   ========================================================================== */
+
+/* Disable selection, dragging, and touch callouts across all media */
+img, video, canvas, .project-media-wrap, .photo-gallery-grid, .featured-film-card, .modal-media-container {
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  user-drag: none !important;
+}
+
+/* Luxury Protection Toast Notification */
+.cine-protection-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(13, 14, 20, 0.95);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--border-gold);
+  color: var(--text-primary);
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.25);
+  z-index: 999999;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cine-protection-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.cine-protection-toast .lock-icon {
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+}
+
+/* Screenshot Deterrence & Blur Shield */
+body.screenshot-shield .project-media-wrap,
+body.screenshot-shield .gallery-photo-item,
+body.screenshot-shield .featured-video-wrap,
+body.screenshot-shield #animation-container,
+body.screenshot-shield .modal-media-container {
+  filter: blur(40px) brightness(0.3) !important;
+  transition: filter 0.05s ease;
+}
+
+body.screenshot-shield::before {
+  content: "🔒 CINEADDICT STUDIOS · PROTECTED CONTENT · UNAUTHORIZED CAPTURE IS RESTRICTED";
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(7, 8, 11, 0.96);
+  color: var(--accent-gold);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.12em;
+  text-align: center;
+  padding: 2rem;
+  z-index: 999998;
+}
+
+/* Print Protection: Completely blanks media on Ctrl+P / Cmd+P */
+@media print {
+  body {
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+  
+  body * {
+    display: none !important;
+  }
+  
+  html::before {
+    content: "© CineAddict Studios. All images, films, and intellectual property are protected under copyright law. Unauthorized printing, reproduction, or digital duplication is strictly prohibited.";
+    display: block !important;
+    padding: 3rem;
+    font-size: 16pt;
+    font-family: sans-serif;
+    color: #000000;
+    text-align: center;
+  }
+}
