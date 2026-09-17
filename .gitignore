@@ -1,0 +1,11 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Backup of uncompressed master video files
+.originals_backup/
+
+# Redundant zip file (extracted frames are preserved in video_frames_24fps_png/)
+video_frames_24fps_png.zip

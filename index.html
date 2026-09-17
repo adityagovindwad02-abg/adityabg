@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Aditya Govindwad — Award-winning Professional Photographer & Cinematic Video Editor Portfolio with Smooth Interactive Canvas Scroll Animation">
+  <title>Aditya Govindwad — Photographer & Cinematic Video Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================== FIXED BACKGROUND CANVAS ==================== -->
+  <div id="canvas-wrapper" aria-hidden="true">
+    <canvas id="hero-canvas"></canvas>
+    <!-- Subtle dark vignette overlay to preserve high readability across downstream sections -->
+    <div id="canvas-depth-overlay"></div>
+  </div>
+
+  <!-- Ambient Preload Progress Bar (Top) -->
+  <div id="loader-bar-container" aria-hidden="true">
+    <div id="loader-bar"></div>
+  </div>
+
+  <!-- Live Frame Counter Badge (bottom-right) -->
+  <div id="frame-counter" class="frame-badge" aria-label="Current video frame">
+    <span class="pulse-indicator"></span>
+    <span id="current-frame-num">001</span>
+    <span class="separator">/</span>
+    <span class="total-frame-num">240</span>
+  </div>
+
+  <!-- ==================== PAGE CONTENT WRAPPER ==================== -->
+  <div id="page-wrapper">
+
+    <!-- HEADER / NAVIGATION -->
+    <header id="site-header">
+      <div class="nav-container">
+        <!-- Logo -->
+        <a href="#hero" class="brand-logo" aria-label="Aditya Govindwad Home">
+          <span class="logo-dot">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <circle cx="7" cy="7" r="7" fill="#fdbd10"/>
+              <circle cx="7" cy="7" r="3.5" fill="#0c0d10"/>
+            </svg>
+          </span>
+          <span class="logo-text">Aditya<span class="accent-period">.</span></span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="nav-menu" id="nav-menu">
+          <a href="#hero" class="nav-link active">Home</a>
+          <a href="#services" class="nav-link">Services</a>
+          <a href="#tools" class="nav-link">Gear & Suite</a>
+          <a href="#portfolio" class="nav-link">Films & Photos</a>
+          <a href="#journey" class="nav-link">Journey</a>
+          <a href="#about" class="nav-link">About Me</a>
+        </nav>
+
+        <!-- Right Action Button -->
+        <div class="nav-actions">
+          <a href="#contact" class="btn-talk">
+            <span>Book a Shoot</span>
+            <span class="btn-icon-circle">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3M8.5 1.5V7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button class="mobile-menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ==================== HERO SECTION ==================== -->
+      <section id="hero" class="hero-section">
+        <div class="hero-container">
+
+          <!-- Top Badge & Main Headline -->
+          <div class="hero-headline-group">
+            <div class="badge-award">
+              <span class="badge-icon">✦</span>
+              <span>Award-winning Photographer & Cinematic Video Editor</span>
+            </div>
+            <h1 class="hero-title">I'm Aditya Govindwad</h1>
+            <p class="hero-subtitle">Professional Photographer & Cinematic Video Editor</p>
+          </div>
+
+          <!-- Rotating "HIRE ME / BOOK SHOOT" Stamp Badge -->
+          <div class="rotating-badge-wrapper" aria-hidden="true">
+            <div class="rotating-badge">
+              <svg viewBox="0 0 120 120" class="rotating-text-svg">
+                <path id="textCircle" d="M 60,60 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0" fill="none" />
+                <text font-size="9.5" font-weight="700" letter-spacing="2.2" fill="#ffffff">
+                  HIRE ME NOW • BOOK A SHOOT • HIRE ME NOW • 
+                </text>
+              </svg>
+              <div class="rotating-badge-center">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M7 17L17 7M17 7H9M17 7V15" stroke="#fdbd10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Columns Grid (Framing the Center Canvas Animation) -->
+          <div class="hero-columns-grid">
+
+            <!-- Left Column: Socials, Reviews, Primary Actions -->
+            <div class="hero-col-left">
+              <div class="social-follow-box">
+                <span class="section-micro-label">Follow Me On</span>
+                <div class="social-icons-row">
+                  <a href="#" class="social-icon-btn" aria-label="Instagram">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                  </a>
+                  <a href="#" class="social-icon-btn" aria-label="YouTube">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                  </a>
+                  <a href="#" class="social-icon-btn" aria-label="Vimeo">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881l-1.922-7.051c-.716-2.56-1.508-3.843-2.384-3.843-.191 0-.853.398-1.99 1.199l-1.198-1.542c1.238-1.088 2.457-2.179 3.655-3.272 1.656-1.429 2.883-2.179 3.682-2.25 1.884-.176 3.051.986 3.498 3.486.48 2.684.819 4.359 1.018 5.025.597 2.766 1.252 4.148 1.968 4.148.555 0 1.285-.826 2.193-2.482.909-1.655 1.393-2.908 1.454-3.759.106-1.439-.41-2.16-1.548-2.16-.532 0-1.092.122-1.682.366 1.093-3.58 3.187-5.309 6.284-5.184 2.296.088 3.393 1.503 3.297 4.242z"/>
+                    </svg>
+                  </a>
+                  <a href="#" class="social-icon-btn" aria-label="Behance">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8.2 11.5c1.4 0 2.4-.6 2.4-2.1 0-1.2-.8-1.9-2.1-1.9H3v4h5.2zm.3 4.8c1.7 0 2.7-.8 2.7-2.3 0-1.4-.9-2.2-2.5-2.2H3v4.5h5.5zM0 5h8.6c2.8 0 4.9 1.4 4.9 3.8 0 1.5-.8 2.7-2.1 3.2 1.8.5 2.8 1.9 2.8 3.8 0 2.8-2.3 4.3-5.3 4.3H0V5zm16.5 2h5v1.4h-5V7zm5.5 7.7c-.1 2.5-2 4.4-4.8 4.4-3.1 0-5.1-2.2-5.1-5.3 0-3.2 2-5.4 5.1-5.4 3 0 4.8 2.2 4.8 5.2v.9h-7.6c.2 1.6 1.3 2.6 2.8 2.6 1.2 0 2-.6 2.3-1.6l2.5-.8zm-2.4-3.3c-.2-1.3-1.1-2.1-2.4-2.1-1.3 0-2.2.8-2.4 2.1h4.8z"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Reviews Widget -->
+              <div class="reviews-card">
+                <div class="avatar-stack">
+                  <span class="avatar av-1"></span>
+                  <span class="avatar av-2"></span>
+                  <span class="avatar av-3"></span>
+                </div>
+                <div class="reviews-text-group">
+                  <div class="rating-stars">
+                    <span class="star-rating">350+ Projects</span>
+                    <span class="rating-number">(4.9 of 5)</span>
+                  </div>
+                  <span class="reviews-caption">Reviews from Global Directors & Brands</span>
+                </div>
+              </div>
+
+              <!-- Primary CTAs -->
+              <div class="hero-actions-row">
+                <a href="#portfolio" class="btn-primary-gold">
+                  <span>Showreel</span>
+                  <span class="circle-arrow-black">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3M8.5 1.5V7" stroke="#000000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </a>
+                <a href="#contact" class="btn-secondary-pill">Hire Me</a>
+              </div>
+            </div>
+
+            <!-- Right Column: Quotation & Tag Badges -->
+            <div class="hero-col-right">
+              <div class="quote-card">
+                <div class="quote-icon">“</div>
+                <p class="quote-body">Exceptional cinematic vision, breathtaking color grading, and captivating visual storytelling!</p>
+              </div>
+
+              <div class="hero-tags-box">
+                <span class="hero-tag-pill active-tag">Cinematography</span>
+                <span class="hero-tag-pill">Color Grading</span>
+                <span class="hero-tag-pill active-tag">Commercial Films</span>
+                <span class="hero-tag-pill">Sound Design</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Floating Scroll Hint -->
+          <div class="hero-scroll-cue">
+            <span class="mouse-icon">
+              <span class="mouse-wheel"></span>
+            </span>
+            <span>Scroll down to interact & scrub</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== MARQUEE TICKER ==================== -->
+      <section class="marquee-section" aria-hidden="true">
+        <div class="marquee-track">
+          <div class="marquee-content">
+            <span class="marquee-item">Cinematography</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Color Grading</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Commercial Films</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Fashion Photography</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Sound Design</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">4K/8K Editing</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Music Videos</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Drone Visuals</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Visual Storytelling</span>
+            <span class="star-sep">✦</span>
+          </div>
+          <div class="marquee-content" aria-hidden="true">
+            <span class="marquee-item">Cinematography</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Color Grading</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Commercial Films</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Fashion Photography</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Sound Design</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">4K/8K Editing</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Music Videos</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Drone Visuals</span>
+            <span class="star-sep">✦</span>
+            <span class="marquee-item">Visual Storytelling</span>
+            <span class="star-sep">✦</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SERVICES ACCORDION ==================== -->
+      <section id="services" class="content-section services-section">
+        <div class="section-container">
+          
+          <div class="section-header-row">
+            <div class="section-title-wrap">
+              <span class="section-tag"><span class="tag-star">✦</span> My Craft & Services</span>
+              <h2 class="section-heading">How I Bring <span class="text-gold">Stories to Life</span></h2>
+            </div>
+            <a href="#contact" class="btn-inline-link">
+              <span>View All Services</span>
+              <span class="arrow-circle">↗</span>
+            </a>
+          </div>
+
+          <!-- Interactive Accordion with custom shape -->
+          <div class="services-accordion" id="services-accordion">
+
+            <!-- Item 01 -->
+            <div class="service-item" data-index="1">
+              <div class="service-bar">
+                <div class="service-bar-left">
+                  <span class="service-num">01.</span>
+                  <span class="service-name">Cinematic Video Editing</span>
+                </div>
+                <button class="service-toggle-btn" aria-label="Expand Cinematic Video Editing">
+                  <span class="arrow-icon">↗</span>
+                </button>
+              </div>
+              <div class="service-panel">
+                <p class="service-desc">Transforming raw camera footage into emotionally resonant narratives with rhythm, pace, seamless transitions, and high-impact pacing.</p>
+                <div class="service-tags">
+                  <span class="service-subtag">Narrative Pacing</span>
+                  <span class="service-subtag">Commercial Cuts</span>
+                  <span class="service-subtag">Music Video Editing</span>
+                  <span class="service-subtag">Sound Sync & Foley</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 02 (Active by Default as in Screenshot) -->
+            <div class="service-item active" data-index="2">
+              <div class="service-bar">
+                <div class="service-bar-left">
+                  <span class="service-num">02.</span>
+                  <span class="service-name">Professional Photography</span>
+                </div>
+                <button class="service-toggle-btn" aria-label="Expand Professional Photography">
+                  <span class="arrow-icon">↗</span>
+                </button>
+              </div>
+              <div class="service-panel">
+                <p class="service-desc">Capturing raw emotion, striking lighting, and high-fashion aesthetics across editorial, commercial, and portrait photography.</p>
+                <div class="service-tags">
+                  <span class="service-subtag">Editorial & Fashion</span>
+                  <span class="service-subtag">Commercial Campaigns</span>
+                  <span class="service-subtag">Studio & Natural Light</span>
+                  <span class="service-subtag">High-End Retouching</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 03 -->
+            <div class="service-item" data-index="3">
+              <div class="service-bar">
+                <div class="service-bar-left">
+                  <span class="service-num">03.</span>
+                  <span class="service-name">Color Grading & Finishing</span>
+                </div>
+                <button class="service-toggle-btn" aria-label="Expand Color Grading & Finishing">
+                  <span class="arrow-icon">↗</span>
+                </button>
+              </div>
+              <div class="service-panel">
+                <p class="service-desc">Industry-grade color science in DaVinci Resolve to establish cinematic mood, film emulation, tone balance, and tonal separation.</p>
+                <div class="service-tags">
+                  <span class="service-subtag">DaVinci Resolve Studio</span>
+                  <span class="service-subtag">Film Stock Emulation</span>
+                  <span class="service-subtag">ACES & Log Workflows</span>
+                  <span class="service-subtag">HDR & Rec.709 Mastering</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 04 -->
+            <div class="service-item" data-index="4">
+              <div class="service-bar">
+                <div class="service-bar-left">
+                  <span class="service-num">04.</span>
+                  <span class="service-name">Sound Design & Audio Mixing</span>
+                </div>
+                <button class="service-toggle-btn" aria-label="Expand Sound Design & Audio Mixing">
+                  <span class="arrow-icon">↗</span>
+                </button>
+              </div>
+              <div class="service-panel">
+                <p class="service-desc">Immersive audio atmospheres, foley effects, dialogue clean-up, and dynamic scoring sync to dramatically amplify visual impact.</p>
+                <div class="service-tags">
+                  <span class="service-subtag">Foley & Ambience</span>
+                  <span class="service-subtag">Dialogue Mastering</span>
+                  <span class="service-subtag">Dynamic Score Sync</span>
+                  <span class="service-subtag">Surround Sound Mixing</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 05 -->
+            <div class="service-item" data-index="5">
+              <div class="service-bar">
+                <div class="service-bar-left">
+                  <span class="service-num">05.</span>
+                  <span class="service-name">Drone & Aerial Cinematography</span>
+                </div>
+                <button class="service-toggle-btn" aria-label="Expand Drone & Aerial Cinematography">
+                  <span class="arrow-icon">↗</span>
+                </button>
+              </div>
+              <div class="service-panel">
+                <p class="service-desc">Capturing sweeping bird's-eye perspectives, dynamic high-speed tracking shots, and cinematic landscape compositions.</p>
+                <div class="service-tags">
+                  <span class="service-subtag">FPV Drone Tracking</span>
+                  <span class="service-subtag">4K/60fps ProRes Aerials</span>
+                  <span class="service-subtag">Location Scouting</span>
+                  <span class="service-subtag">Landscape Epics</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== SKILLS & TOOLS ==================== -->
+      <section id="tools" class="content-section tools-section">
+        <div class="section-container">
+          
+          <div class="section-header-center">
+            <span class="section-tag"><span class="tag-star">✦</span> Post-Production Suite</span>
+            <h2 class="section-heading">Exploring the Tools Behind <span class="text-gold">My Visuals</span></h2>
+          </div>
+
+          <div class="tools-grid">
+            <!-- Tool 1: DaVinci Resolve Studio -->
+            <div class="tool-card">
+              <div class="tool-header">
+                <div class="tool-icon-wrap">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="#fdbd10" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="5" fill="#fdbd10"/>
+                    <path d="M12 2V6M12 18V22M2 12H6M18 12H22" stroke="#fdbd10" stroke-width="2"/>
+                  </svg>
+                </div>
+                <span class="tool-badge">98%</span>
+              </div>
+              <div class="tool-info">
+                <h3 class="tool-name">DaVinci Resolve Studio</h3>
+                <div class="tool-progress-track">
+                  <div class="tool-progress-fill" style="width: 98%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tool 2: Adobe Premiere Pro -->
+            <div class="tool-card">
+              <div class="tool-header">
+                <div class="tool-icon-wrap">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="#9999FF">
+                    <rect width="24" height="24" rx="4" fill="#00005B"/>
+                    <path d="M5.5 6.5h4.2c1.7 0 2.8.9 2.8 2.4s-1.1 2.4-2.8 2.4H7.5v4.2H5.5V6.5zm2 3.3h2c.6 0 1-.3 1-.9s-.4-.9-1-.9h-2v1.8zm6.5 2.1h1.7v1c.4-.7 1.1-1.1 1.9-1.1.2 0 .5 0 .7.1v1.9c-.3-.1-.6-.1-.9-.1-.9 0-1.5.6-1.5 1.7v3h-1.9v-6.6z" fill="#9999FF"/>
+                  </svg>
+                </div>
+                <span class="tool-badge">95%</span>
+              </div>
+              <div class="tool-info">
+                <h3 class="tool-name">Premiere Pro</h3>
+                <div class="tool-progress-track">
+                  <div class="tool-progress-fill" style="width: 95%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tool 3: Adobe After Effects -->
+            <div class="tool-card">
+              <div class="tool-header">
+                <div class="tool-icon-wrap">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="#9999FF">
+                    <rect width="24" height="24" rx="4" fill="#00005B"/>
+                    <path d="M5.5 15.5l3.2-9h1.7l3.2 9h-1.9l-.7-2.1H7.8l-.7 2.1H5.5zm2.8-3.6h2.2L9.4 8.7l-1.1 3.2zm6.2 1.6c.1.9.9 1.4 1.9 1.4.7 0 1.3-.3 1.6-.7l1.3 1c-.7.9-1.8 1.4-3.1 1.4-2.1 0-3.5-1.4-3.5-3.6 0-2.1 1.4-3.6 3.4-3.6 2.1 0 3.3 1.5 3.3 3.5v.6h-4.9zm3.1-1.3c0-.8-.5-1.3-1.4-1.3-.8 0-1.4.5-1.5 1.3h2.9z" fill="#D291FF"/>
+                  </svg>
+                </div>
+                <span class="tool-badge">90%</span>
+              </div>
+              <div class="tool-info">
+                <h3 class="tool-name">After Effects</h3>
+                <div class="tool-progress-track">
+                  <div class="tool-progress-fill" style="width: 90%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tool 4: Adobe Lightroom Classic -->
+            <div class="tool-card">
+              <div class="tool-header">
+                <div class="tool-icon-wrap">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="#31A8FF">
+                    <rect width="24" height="24" rx="4" fill="#001E36"/>
+                    <path d="M6 6.5h2v6.5h3.5v1.8H6V6.5zm7 3h1.8v1c.4-.7 1.1-1.1 1.9-1.1.2 0 .5 0 .7.1v1.9c-.3-.1-.6-.1-.9-.1-.9 0-1.6.6-1.6 1.7v3.2H13V9.5z" fill="#31A8FF"/>
+                  </svg>
+                </div>
+                <span class="tool-badge">96%</span>
+              </div>
+              <div class="tool-info">
+                <h3 class="tool-name">Lightroom Classic</h3>
+                <div class="tool-progress-track">
+                  <div class="tool-progress-fill" style="width: 96%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tool 5: Adobe Photoshop -->
+            <div class="tool-card">
+              <div class="tool-header">
+                <div class="tool-icon-wrap">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="#31A8FF">
+                    <rect width="24" height="24" rx="4" fill="#001E36"/>
+                    <path d="M0 0v24h24V0H0zm2.25 2.25h19.5v19.5H2.25V2.25zm4.875 3.375v12.75h3.375v-4.875h2.25c2.625 0 4.5-1.5 4.5-3.938 0-2.437-1.875-3.937-4.5-3.937H7.125zm3.375 2.625h1.875c1.125 0 1.875.563 1.875 1.313 0 .75-.75 1.312-1.875 1.312H10.5V8.25z"/>
+                  </svg>
+                </div>
+                <span class="tool-badge">92%</span>
+              </div>
+              <div class="tool-info">
+                <h3 class="tool-name">Photoshop (Retouching)</h3>
+                <div class="tool-progress-track">
+                  <div class="tool-progress-fill" style="width: 92%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tool 6: Cine Gear & Color Science -->
+            <div class="tool-card">
+              <div class="tool-header">
+                <div class="tool-icon-wrap">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 4H20V8H4V4ZM4 9H20V20H4V9ZM7 11V18L13 14.5L7 11Z" fill="#fdbd10"/>
+                  </svg>
+                </div>
+                <span class="tool-badge">88%</span>
+              </div>
+              <div class="tool-info">
+                <h3 class="tool-name">Sony Cine RAW & RED</h3>
+                <div class="tool-progress-track">
+                  <div class="tool-progress-fill" style="width: 88%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== PORTFOLIO / PROJECTS ==================== -->
+      <section id="portfolio" class="content-section portfolio-section">
+        <div class="section-container">
+          
+          <div class="section-header-row">
+            <div class="section-title-wrap">
+              <span class="section-tag"><span class="tag-star">✦</span> Selected Works</span>
+              <h2 class="section-heading">Let's Have a <span class="text-gold">Look at My Portfolio</span></h2>
+            </div>
+            <a href="#contact" class="btn-inline-link">
+              <span>View All Projects</span>
+              <span class="arrow-circle">↗</span>
+            </a>
+          </div>
+
+          <!-- Portfolio Filter Controls -->
+          <div class="portfolio-filter-row">
+            <button class="filter-btn active" data-filter="all">All Works (5)</button>
+            <button class="filter-btn" data-filter="film">Cinematic Films</button>
+            <button class="filter-btn" data-filter="reel">Vertical Reels (9:16)</button>
+            <button class="filter-btn" data-filter="photo">Photography</button>
+          </div>
+
+          <div class="portfolio-grid" id="portfolio-works-grid">
+            
+            <!-- Work 1: Ditya 00.mp4 (Landscape Cinematic Film) -->
+            <article class="project-card work-item" data-category="film">
+              <div class="project-media-wrap video-aspect-16-9" data-src="Ditya 00.mp4" data-title="Ditya Turns One — 1st Birthday Cinematic Celebration" data-type="video">
+                <video class="card-video-element" poster="media/Ditya 00.mp4.png" preload="metadata" muted loop playsinline>
+                  <source src="Ditya 00.mp4" type="video/mp4">
+                </video>
+                <div class="media-overlay-controls">
+                  <div class="media-badge-group">
+                    <span class="media-type-badge cine-badge"><span class="badge-dot"></span>4K Cinematic Film</span>
+                    <span class="media-duration-badge">01:50</span>
+                  </div>
+                  <button class="play-action-btn" aria-label="Play Ditya Turns One">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#000000">
+                      <path d="M8 5V19L19 12L8 5Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="project-details">
+                <div class="project-tags-row">
+                  <span class="project-tag">Cinematography</span>
+                  <span class="project-tag">Color Grading</span>
+                  <span class="project-tag">Celebration Film</span>
+                </div>
+                <div class="project-title-row">
+                  <h3 class="project-title">Ditya Turns One — 1st Birthday Celebration</h3>
+                  <button class="project-play-pill" data-src="Ditya 00.mp4" data-title="Ditya Turns One — 1st Birthday Celebration">Watch Film ↗</button>
+                </div>
+                <p class="project-desc">A heartwarming cinematic celebration film capturing baby milestones with soft pastel color science, candid smiles, and emotive rhythmic pacing.</p>
+              </div>
+            </article>
+
+            <!-- Work 2: Vastu.mp4 (Landscape Architectural & Drone Film) -->
+            <article class="project-card work-item" data-category="film">
+              <div class="project-media-wrap video-aspect-16-9" data-src="Vastu.mp4" data-title="Vastu Shanti — Night Aerial & Architectural Event Film" data-type="video">
+                <video class="card-video-element" poster="media/Vastu.mp4.png" preload="metadata" muted loop playsinline>
+                  <source src="Vastu.mp4" type="video/mp4">
+                </video>
+                <div class="media-overlay-controls">
+                  <div class="media-badge-group">
+                    <span class="media-type-badge cine-badge"><span class="badge-dot"></span>Drone & Event Film</span>
+                    <span class="media-duration-badge">01:34</span>
+                  </div>
+                  <button class="play-action-btn" aria-label="Play Vastu Shanti Film">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#000000">
+                      <path d="M8 5V19L19 12L8 5Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="project-details">
+                <div class="project-tags-row">
+                  <span class="project-tag">Drone Aerials</span>
+                  <span class="project-tag">Night Cinematography</span>
+                  <span class="project-tag">Architecture</span>
+                </div>
+                <div class="project-title-row">
+                  <h3 class="project-title">Vastu Shanti — Architectural Celebration</h3>
+                  <button class="project-play-pill" data-src="Vastu.mp4" data-title="Vastu Shanti — Architectural Celebration">Watch Film ↗</button>
+                </div>
+                <p class="project-desc">Sweeping night drone aerials and event documentation highlighting illuminated architectural structures, sacred traditions, and vibrant ambiance.</p>
+              </div>
+            </article>
+
+            <!-- Work 3: Makeup.mp4 (Vertical 9:16 Bridal & Fashion Reel) -->
+            <article class="project-card work-item vertical-card" data-category="reel">
+              <div class="project-media-wrap video-aspect-9-16" data-src="Makeup.mp4" data-title="Bridal Elegance — Traditional Makeup & Portrait Film" data-type="video">
+                <video class="card-video-element" poster="media/Makeup.mp4.png" preload="metadata" muted loop playsinline>
+                  <source src="Makeup.mp4" type="video/mp4">
+                </video>
+                <div class="media-overlay-controls">
+                  <div class="media-badge-group">
+                    <span class="media-type-badge reel-badge"><span class="badge-dot"></span>Vertical Reel 9:16</span>
+                    <span class="media-duration-badge">00:31</span>
+                  </div>
+                  <button class="play-action-btn" aria-label="Play Bridal Makeup Reel">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#000000">
+                      <path d="M8 5V19L19 12L8 5Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="project-details">
+                <div class="project-tags-row">
+                  <span class="project-tag">Bridal Film</span>
+                  <span class="project-tag">Beauty & Makeup</span>
+                  <span class="project-tag">Portrait Reel</span>
+                </div>
+                <div class="project-title-row">
+                  <h3 class="project-title">Bridal Glamour — Traditional Makeup Reel</h3>
+                  <button class="project-play-pill" data-src="Makeup.mp4" data-title="Bridal Glamour — Traditional Makeup Reel">Watch Reel ↗</button>
+                </div>
+                <p class="project-desc">Ultra-crisp 4K vertical portrait reel capturing intricate bridal jewelry, cultural peacock motif artistry, and glowing studio lighting.</p>
+              </div>
+            </article>
+
+            <!-- Work 4: Maternity .mp4 (Vertical 9:16 Maternity Film) -->
+            <article class="project-card work-item vertical-card" data-category="reel">
+              <div class="project-media-wrap video-aspect-9-16" data-src="Maternity .mp4" data-title="Maternity Radiance — Traditional Dohale Jevan Shoot" data-type="video">
+                <video class="card-video-element" poster="media/Maternity%20.mp4.png" preload="metadata" muted loop playsinline>
+                  <source src="Maternity .mp4" type="video/mp4">
+                </video>
+                <div class="media-overlay-controls">
+                  <div class="media-badge-group">
+                    <span class="media-type-badge reel-badge"><span class="badge-dot"></span>Maternity Reel 9:16</span>
+                    <span class="media-duration-badge">01:03</span>
+                  </div>
+                  <button class="play-action-btn" aria-label="Play Maternity Film">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#000000">
+                      <path d="M8 5V19L19 12L8 5Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="project-details">
+                <div class="project-tags-row">
+                  <span class="project-tag">Maternity Film</span>
+                  <span class="project-tag">Cultural Heritage</span>
+                  <span class="project-tag">Cinematic Reel</span>
+                </div>
+                <div class="project-title-row">
+                  <h3 class="project-title">Maternity Radiance — Dohale Jevan Film</h3>
+                  <button class="project-play-pill" data-src="Maternity .mp4" data-title="Maternity Radiance — Dohale Jevan Film">Watch Reel ↗</button>
+                </div>
+                <p class="project-desc">A joyful maternal celebration reel featuring vibrant silk attire, traditional swing framing, and emotional narrative cinematography.</p>
+              </div>
+            </article>
+
+            <!-- Work 5: MDC09939 copy.jpg (Fine Art Conceptual Photography) -->
+            <article class="project-card work-item vertical-card" data-category="photo">
+              <div class="project-media-wrap photo-aspect-wrap" data-src="MDC09939 copy.jpg" data-title="Just Engaged — Rushikesh & Anjali (Fine-Art Conceptual Photography)" data-type="image">
+                <img src="MDC09939 copy.jpg" alt="Just Engaged Rushikesh and Anjali Fine Art Photography" class="card-img-element" loading="lazy">
+                <div class="media-overlay-controls">
+                  <div class="media-badge-group">
+                    <span class="media-type-badge photo-badge"><span class="badge-dot"></span>Fine-Art Photography</span>
+                    <span class="media-duration-badge">High-Res</span>
+                  </div>
+                  <button class="play-action-btn zoom-btn" aria-label="View Full Photo">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                      <line x1="11" y1="8" x2="11" y2="14"></line>
+                      <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="project-details">
+                <div class="project-tags-row">
+                  <span class="project-tag">Conceptual Art</span>
+                  <span class="project-tag">Engagement Shoot</span>
+                  <span class="project-tag">Fine Art</span>
+                </div>
+                <div class="project-title-row">
+                  <h3 class="project-title">Just Engaged — Rushikesh // Anjali</h3>
+                  <button class="project-play-pill" data-src="MDC09939 copy.jpg" data-title="Just Engaged — Rushikesh // Anjali">View Photo ↗</button>
+                </div>
+                <p class="project-desc">Creative conceptual engagement photography combining handcrafted gold rings and botanical rose silhouettes into a symbolic art piece.</p>
+              </div>
+            </article>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== EDUCATION & WORK JOURNEY ==================== -->
+      <section id="journey" class="content-section journey-section">
+        <div class="section-container">
+          
+          <div class="section-header-center">
+            <span class="section-tag"><span class="tag-star">✦</span> Career Timeline</span>
+            <h2 class="section-heading">My Cinematic and <span class="text-gold">Creative Journey</span></h2>
+          </div>
+
+          <div class="journey-columns-grid">
+
+            <!-- Column 1: Education & Credentials -->
+            <div class="journey-column">
+              <div class="column-header">
+                <div class="col-icon-circle">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM5 13.18V17.18C5 19.84 8.13 22 12 22C15.87 22 19 19.84 19 17.18V13.18L12 17L5 13.18Z" fill="#fdbd10"/>
+                  </svg>
+                </div>
+                <h3 class="col-title">Education & Credentials</h3>
+              </div>
+
+              <div class="timeline-list">
+                <!-- Degree 1: MFA Cinematography -->
+                <div class="timeline-card">
+                  <div class="card-top-row">
+                    <h4 class="institute-name">National Film & Media Arts</h4>
+                    <span class="period-badge">2017 – 2019</span>
+                  </div>
+                  <p class="degree-title">Master of Fine Arts in Cinematography</p>
+                  <p class="timeline-desc">Advanced training in cinematic visual storytelling, professional camera operation, composition, lighting design, lens selection, and visual direction. Specialized in creating emotionally driven imagery through controlled framing, movement, light, and cinematic pacing.</p>
+                  <div class="timeline-detail-box">
+                    <span class="detail-label">Core Focus</span>
+                    <div class="detail-tags-cloud">
+                      <span class="detail-tag">Cinematography & Visual Storytelling</span>
+                      <span class="detail-tag">Advanced Camera Framing & Composition</span>
+                      <span class="detail-tag">Three-Point & Cinematic Lighting</span>
+                      <span class="detail-tag">Lens Selection & Optical Characteristics</span>
+                      <span class="detail-tag">Camera Movement & Shot Design</span>
+                      <span class="detail-tag">Narrative Pacing & Visual Continuity</span>
+                      <span class="detail-tag">Production Design & Visual Aesthetics</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Credential 2: DaVinci Resolve Master Colorist -->
+                <div class="timeline-card">
+                  <div class="card-top-row">
+                    <h4 class="institute-name">Blackmagic Design</h4>
+                    <span class="period-badge">2020</span>
+                  </div>
+                  <p class="degree-title">Certified DaVinci Resolve Master Colorist</p>
+                  <p class="timeline-desc">Professional certification focused on advanced color grading and post-production workflows using DaVinci Resolve. Developed expertise in transforming professionally captured footage into cohesive cinematic visuals while maintaining skin tones, dynamic range, and visual consistency.</p>
+                  <div class="timeline-detail-box">
+                    <span class="detail-label">Core Expertise</span>
+                    <div class="detail-tags-cloud">
+                      <span class="detail-tag">Professional Color Correction & Grading</span>
+                      <span class="detail-tag">DaVinci Resolve Workflow</span>
+                      <span class="detail-tag">Color Management</span>
+                      <span class="detail-tag">ACES Color Pipeline</span>
+                      <span class="detail-tag">Look Development & Creative Grading</span>
+                      <span class="detail-tag">HDR Mastering</span>
+                      <span class="detail-tag">Advanced Node-Tree Architecture</span>
+                      <span class="detail-tag">Skin Tone & Exposure Management</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Degree 3: Bachelor's Photography -->
+                <div class="timeline-card">
+                  <div class="card-top-row">
+                    <h4 class="institute-name">Academy of Visual Arts</h4>
+                    <span class="period-badge">2014 – 2018</span>
+                  </div>
+                  <p class="degree-title">Bachelor’s in Photography & Visual Communication</p>
+                  <p class="timeline-desc">Built a strong foundation in photography, visual communication, studio production, and image-making. Developed an understanding of how light, composition, color, and perspective work together to communicate a visual story.</p>
+                  <div class="timeline-detail-box">
+                    <span class="detail-label">Core Focus</span>
+                    <div class="detail-tags-cloud">
+                      <span class="detail-tag">Professional Photography</span>
+                      <span class="detail-tag">Studio & Strobe Lighting</span>
+                      <span class="detail-tag">Editorial Composition</span>
+                      <span class="detail-tag">Portrait & Commercial Photography</span>
+                      <span class="detail-tag">Visual Communication</span>
+                      <span class="detail-tag">Digital Imaging & Color Science</span>
+                      <span class="detail-tag">Image Composition & Creative Direction</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 2: Industry Experience -->
+            <div class="journey-column">
+              <div class="column-header">
+                <div class="col-icon-circle">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M20 6H16V4C16 2.89 15.11 2 14 2H10C8.89 2 8 2.89 8 4V6H4C2.89 6 2 6.89 2 8V19C2 20.11 2.89 21 4 21H20C21.11 21 22 20.11 22 19V8C22 6.89 21.11 6 20 6ZM10 4H14V6H10V4ZM20 19H4V8H20V19Z" fill="#fdbd10"/>
+                  </svg>
+                </div>
+                <h3 class="col-title">Industry Experience</h3>
+              </div>
+
+              <div class="timeline-list">
+                <!-- Job 1: Cine Stories Studio -->
+                <div class="timeline-card">
+                  <div class="card-top-row">
+                    <h4 class="institute-name">Cine Stories Studio</h4>
+                    <span class="period-badge">2020 – Present</span>
+                  </div>
+                  <p class="degree-title">Lead Cinematic Video Editor & Director of Photography</p>
+                  <p class="timeline-desc">Leading cinematic production and post-production across commercial films, branded content, music videos, fashion productions, and high-end visual campaigns. Responsible for translating creative concepts into visually compelling productions, from initial visual planning and cinematography through editing, color grading, and final delivery.</p>
+                  
+                  <div class="timeline-detail-box">
+                    <span class="detail-label">Key Responsibilities</span>
+                    <div class="detail-tags-cloud">
+                      <span class="detail-tag">Directing & Executing Cinematography</span>
+                      <span class="detail-tag">Visual Concept Development</span>
+                      <span class="detail-tag">Camera & Lens Selection</span>
+                      <span class="detail-tag">Lighting Design & Shot Planning</span>
+                      <span class="detail-tag">Cinematic Video Editing</span>
+                      <span class="detail-tag">Advanced Color Grading</span>
+                      <span class="detail-tag">Commercial & Brand Film Production</span>
+                      <span class="detail-tag">Music Video & Fashion Film Direction</span>
+                      <span class="detail-tag">Visual Storytelling & Creative Direction</span>
+                      <span class="detail-tag">Final Color & Delivery Workflows</span>
+                    </div>
+                  </div>
+
+                  <div class="creative-impact-banner">
+                    <span class="impact-star">★</span>
+                    <div class="impact-text">
+                      <b>Creative Impact:</b> Contributed to visual productions and campaigns generating <b>50M+ collective impressions</b>, combining cinematic storytelling with commercially focused visual communication.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Job 2: Metropolis Media -->
+                <div class="timeline-card">
+                  <div class="card-top-row">
+                    <h4 class="institute-name">Metropolis Media</h4>
+                    <span class="period-badge">2018 – 2020</span>
+                  </div>
+                  <p class="degree-title">Senior Colorist & Commercial Post-Production Lead</p>
+                  <p class="timeline-desc">Managed professional post-production and color workflows for commercial, documentary, broadcast, and digital content. Worked closely with directors, cinematographers, and creative teams to establish consistent visual identities across multiple formats and deliverables.</p>
+                  
+                  <div class="timeline-detail-box">
+                    <span class="detail-label">Key Responsibilities</span>
+                    <div class="detail-tags-cloud">
+                      <span class="detail-tag">Professional Color Correction & Grading</span>
+                      <span class="detail-tag">Commercial Post-Production</span>
+                      <span class="detail-tag">Broadcast Content Finishing</span>
+                      <span class="detail-tag">Documentary Color Workflows</span>
+                      <span class="detail-tag">Digital Campaign Post-Production</span>
+                      <span class="detail-tag">Look Development</span>
+                      <span class="detail-tag">Visual Consistency & Quality Control</span>
+                      <span class="detail-tag">Final Mastering & Delivery</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== CREATIVE SPECIALIZATIONS ==================== -->
+      <section id="specializations" class="content-section specializations-section">
+        <div class="section-container">
+          
+          <div class="section-header-center">
+            <span class="section-tag"><span class="tag-star">✦</span> Core Mastery</span>
+            <h2 class="section-heading">Creative <span class="text-gold">Specializations</span></h2>
+          </div>
+
+          <div class="specializations-grid">
+            <div class="specialization-card">
+              <div class="spec-icon-wrap">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="9" stroke="#fdbd10" stroke-width="2"/>
+                  <path d="M12 7V17M7 12H17" stroke="#fdbd10" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3 class="spec-title">Cinematography</h3>
+              <p class="spec-desc">Visual storytelling, camera language, composition, movement, lighting, and cinematic shot design.</p>
+            </div>
+
+            <div class="specialization-card">
+              <div class="spec-icon-wrap">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#fdbd10" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M2 17L12 22L22 17" stroke="#fdbd10" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M2 12L12 17L22 12" stroke="#fdbd10" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3 class="spec-title">Color & Finishing</h3>
+              <p class="spec-desc">Professional color correction, creative grading, look development, skin-tone management, and cinematic finishing.</p>
+            </div>
+
+            <div class="specialization-card">
+              <div class="spec-icon-wrap">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect x="2" y="4" width="20" height="16" rx="3" stroke="#fdbd10" stroke-width="2"/>
+                  <path d="M10 9L15 12L10 15V9Z" fill="#fdbd10"/>
+                </svg>
+              </div>
+              <h3 class="spec-title">Video Editing</h3>
+              <p class="spec-desc">Narrative editing, commercial pacing, music synchronization, emotional sequencing, transitions, and final storytelling.</p>
+            </div>
+
+            <div class="specialization-card">
+              <div class="spec-icon-wrap">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" fill="#fdbd10"/>
+                  <path d="M19.4 15A7.4 7.4 0 0 0 20 12A7.4 7.4 0 0 0 19.4 9M4.6 9A7.4 7.4 0 0 0 4 12A7.4 7.4 0 0 0 4.6 15" stroke="#fdbd10" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3 class="spec-title">Creative Direction</h3>
+              <p class="spec-desc">Developing visual concepts and transforming ideas into cohesive cinematic productions from pre-production through final delivery.</p>
+            </div>
+
+            <div class="specialization-card">
+              <div class="spec-icon-wrap">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 6H20V18H4V6Z" stroke="#fdbd10" stroke-width="2"/>
+                  <path d="M14 6L10 18" stroke="#fdbd10" stroke-width="2"/>
+                </svg>
+              </div>
+              <h3 class="spec-title">Commercial Visuals</h3>
+              <p class="spec-desc">Brand films, promotional campaigns, fashion films, music videos, corporate content, and high-impact digital media.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== ABOUT ME / CREATIVE PROFILE ==================== -->
+      <section id="about" class="content-section about-section">
+        <div class="section-container">
+          
+          <div class="about-card-wrapper">
+            <div class="about-content-grid">
+              
+              <!-- Left Visual Profile Accent -->
+              <div class="about-visual-col">
+                <div class="about-portrait-box">
+                  <div class="about-cutout-frame">
+                    <div class="about-gold-bg">
+                      <span class="about-initials">AG</span>
+                    </div>
+                  </div>
+                  <div class="about-experience-pill">
+                    <span class="exp-num">10+</span>
+                    <span class="exp-label">Years Behind the Lens</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Bio & Creative Profile -->
+              <div class="about-bio-col">
+                <span class="section-tag"><span class="tag-star">✦</span> Creative Profile</span>
+                <h2 class="section-heading">Who is <span class="text-gold">Aditya Govindwad?</span></h2>
+                
+                <p class="creative-role-badge">Cinematographer • Director • Editor • Colorist</p>
+
+                <div class="philosophy-quote-box">
+                  <span class="quote-mark">“</span>
+                  <h3 class="philosophy-highlight">Every Frame Should Have a Purpose.</h3>
+                </div>
+
+                <p class="about-body">
+                  A multidisciplinary visual creative specializing in the complete cinematic workflow, from <strong>concept and camera to edit and final color</strong>.
+                </p>
+                <p class="about-body-secondary">
+                  With a foundation in photography and visual communication, advanced cinematography training, and professional color-grading expertise, every stage of production is treated as part of one unified visual language. From carefully designed lighting and intentional camera movement to precise editing and cinematic color, every element serves the emotional core of the narrative.
+                </p>
+
+                <!-- Areas of Expertise Tags -->
+                <div class="expertise-tag-cloud">
+                  <span class="exp-tag">Cinematography</span>
+                  <span class="exp-tag">Photography</span>
+                  <span class="exp-tag">Direction</span>
+                  <span class="exp-tag">Video Editing</span>
+                  <span class="exp-tag">Color Grading</span>
+                  <span class="exp-tag">Commercial Films</span>
+                  <span class="exp-tag">Brand Films</span>
+                  <span class="exp-tag">Fashion Films</span>
+                  <span class="exp-tag">Music Videos</span>
+                  <span class="exp-tag">Visual Storytelling</span>
+                </div>
+
+                <!-- Metric Stats -->
+                <div class="about-stats-row">
+                  <div class="stat-box">
+                    <span class="stat-digit">50M+</span>
+                    <span class="stat-title">Collective Impressions</span>
+                  </div>
+                  <div class="stat-box">
+                    <span class="stat-digit">250+</span>
+                    <span class="stat-title">Films & Shoots Directed</span>
+                  </div>
+                  <div class="stat-box">
+                    <span class="stat-digit">100%</span>
+                    <span class="stat-title">Dedication to Craft</span>
+                  </div>
+                </div>
+
+                <div class="about-cta-row">
+                  <a href="#contact" class="btn-primary-gold">
+                    <span>Let's Create Together</span>
+                    <span class="circle-arrow-black">↗</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== CONTACT / FOOTER ==================== -->
+      <footer id="contact" class="site-footer">
+        <div class="footer-container">
+          
+          <div class="footer-top-row">
+            <div class="footer-brand">
+              <span class="brand-logo">
+                <span class="logo-dot">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <circle cx="7" cy="7" r="7" fill="#fdbd10"/>
+                    <circle cx="7" cy="7" r="3.5" fill="#0c0d10"/>
+                  </svg>
+                </span>
+                <span class="logo-text">Aditya<span class="accent-period">.</span></span>
+              </span>
+              <p class="footer-tagline">Capturing frames and weaving cinematic stories with soul, light, and passion.</p>
+            </div>
+
+            <div class="footer-nav-col">
+              <span class="footer-heading">Navigation</span>
+              <div class="footer-links">
+                <a href="#hero">Home</a>
+                <a href="#services">Services</a>
+                <a href="#tools">Gear & Suite</a>
+                <a href="#portfolio">Films & Photos</a>
+                <a href="#journey">Journey</a>
+                <a href="#about">About Me</a>
+              </div>
+            </div>
+
+            <div class="footer-social-col">
+              <span class="footer-heading">Connect</span>
+              <div class="footer-links">
+                <a href="#">Instagram ↗</a>
+                <a href="#">YouTube ↗</a>
+                <a href="#">Vimeo ↗</a>
+                <a href="#">Behance ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-bottom-row">
+            <p class="copyright-text">© 2026 Aditya Govindwad. All Rights Reserved.</p>
+            <button class="back-to-top-btn" id="back-to-top" aria-label="Back to top">
+              <span>Back to Top</span>
+              <span class="up-arrow">↑</span>
+            </button>
+          </div>
+
+        </div>
+      </footer>
+
+      <!-- ==================== CINEMATIC MEDIA LIGHTBOX MODAL ==================== -->
+      <div id="media-modal" class="media-modal-backdrop" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-header">
+            <div class="modal-title-wrap">
+              <span class="modal-badge">✦ Directing & Cinematography</span>
+              <h3 id="modal-media-title" class="modal-title">Project Title</h3>
+            </div>
+            <button id="modal-close-btn" class="modal-close-btn" aria-label="Close modal">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="modal-media-container" id="modal-media-container">
+            <!-- Dynamic video or image inserted here -->
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
