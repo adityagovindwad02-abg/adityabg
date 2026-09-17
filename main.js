@@ -1,6 +1,7 @@
 /**
- * High-Performance Smooth Scroll Frame Animation & Interactive Portfolio Engine
- * Aditya Govindwad Portfolio — Professional Photographer & Cinematic Video Editor
+ * CINEADDICT — Luxury Wedding Films & Photography
+ * Interactive Engine & Conversion Systems
+ * Location: Pune, Maharashtra, India
  */
 
 (function () {
@@ -11,9 +12,10 @@
   // ==========================================
   const TOTAL_FRAMES = 240;
   const FRAME_BASE_PATH = 'video_frames_24fps_png/frame_';
-  const LERP_DAMPING = 0.12; // Butter-smooth damping factor
+  const LERP_DAMPING = 0.12;
   const isMobileClient = window.innerWidth <= 768 || ('ontouchstart' in window);
-  const CONCURRENT_LOAD_LIMIT = isMobileClient ? 4 : 8; // Friendly to mobile data & bandwidth
+  const CONCURRENT_LOAD_LIMIT = isMobileClient ? 4 : 8;
+  const CINEADDICT_WHATSAPP = '918888888888'; // Primary Studio Booking Line
 
   function getFrameUrl(index) {
     const padded = String(index).padStart(5, '0');
@@ -22,13 +24,12 @@
 
   // DOM Elements - Animation
   const canvas = document.getElementById('hero-canvas');
-  const ctx = canvas.getContext('2d', { alpha: false });
+  const ctx = canvas ? canvas.getContext('2d', { alpha: false }) : null;
   const loaderBar = document.getElementById('loader-bar');
   const loaderBarContainer = document.getElementById('loader-bar-container');
   const currentFrameNum = document.getElementById('current-frame-num');
 
   // DOM Elements - UI & Interactivity
-  const accordionItems = document.querySelectorAll('.service-item');
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('section, footer');
   const backToTopBtn = document.getElementById('back-to-top');
@@ -36,10 +37,11 @@
   const navMenu = document.getElementById('nav-menu');
   const mobileBackdrop = document.getElementById('mobile-backdrop');
   const mobileNavClose = document.getElementById('mobile-nav-close');
+  const mobileStickyBar = document.querySelector('.mobile-sticky-action-bar');
 
   // Animation Engine State
   const images = new Array(TOTAL_FRAMES + 1);
-  const loadedStatus = new Uint8Array(TOTAL_FRAMES + 1); // 1 = loaded, 0 = pending
+  const loadedStatus = new Uint8Array(TOTAL_FRAMES + 1);
   let loadedCount = 0;
   let targetFrame = 1;
   let currentFrame = 1;
@@ -50,8 +52,8 @@
   // 2. CANVAS RESPONSIVE & COVER ENGINE
   // ==========================================
   function resizeCanvas() {
+    if (!canvas || !ctx) return;
     const isMobile = window.innerWidth <= 768;
-    // Clamping DPR to 1.25 on mobile keeps frames razor-sharp while reducing mobile VRAM by 60%
     const maxDpr = isMobile ? 1.25 : 1.75;
     const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
     canvas.width = Math.round(window.innerWidth * dpr);
@@ -68,7 +70,7 @@
   }, { passive: true });
 
   function drawCoverImage(img) {
-    if (!img || !img.complete || img.naturalWidth === 0) return;
+    if (!img || !img.complete || img.naturalWidth === 0 || !ctx || !canvas) return;
 
     const imgW = img.naturalWidth;
     const imgH = img.naturalHeight;
@@ -98,6 +100,7 @@
   }
 
   function drawFrame(frameIndex) {
+    if (!ctx) return;
     let img = images[frameIndex];
 
     if (img && loadedStatus[frameIndex]) {
@@ -105,7 +108,7 @@
       return;
     }
 
-    // Smart nearest-loaded fallback to avoid blank screen or flickering
+    // Nearest-loaded fallback
     let bestFallback = null;
     for (let offset = 1; offset <= 24; offset++) {
       const prev = frameIndex - offset;
@@ -128,9 +131,10 @@
   }
 
   // ==========================================
-  // 3. 60FPS / 120FPS LERP RENDER LOOP
+  // 3. SMOOTH LERP RENDER LOOP
   // ==========================================
   function updateAnimation() {
+    if (!ctx) return;
     const delta = targetFrame - currentFrame;
     if (Math.abs(delta) > 0.001) {
       currentFrame += delta * LERP_DAMPING;
@@ -157,15 +161,24 @@
   // ==========================================
   function onScroll() {
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    if (maxScroll <= 0) return;
+    if (maxScroll > 0) {
+      const scrollRatio = Math.max(0, Math.min(1, window.scrollY / maxScroll));
+      targetFrame = 1 + scrollRatio * (TOTAL_FRAMES - 1);
+    }
 
-    const scrollRatio = Math.max(0, Math.min(1, window.scrollY / maxScroll));
-    targetFrame = 1 + scrollRatio * (TOTAL_FRAMES - 1);
+    // Mobile Sticky Action Bar Visibility
+    if (mobileStickyBar) {
+      if (window.scrollY > 380) {
+        mobileStickyBar.style.display = 'block';
+      } else {
+        mobileStickyBar.style.display = 'none';
+      }
+    }
 
     // Dynamic Navigation Highlighting
     let currentActiveId = '';
     sections.forEach((section) => {
-      const top = section.offsetTop - 120;
+      const top = section.offsetTop - 140;
       const height = section.offsetHeight;
       if (window.scrollY >= top && window.scrollY < top + height) {
         currentActiveId = section.getAttribute('id');
@@ -182,7 +195,7 @@
   window.addEventListener('scroll', onScroll, { passive: true });
 
   // ==========================================
-  // 5. PROGRESSIVE ASSET PRELOADER
+  // 5. ASSET PRELOADER
   // ==========================================
   function loadImage(index) {
     return new Promise((resolve) => {
@@ -198,7 +211,6 @@
       };
 
       img.onerror = () => {
-        console.warn(`[Preloader] Failed to load frame ${index}`);
         loadedStatus[index] = 0;
         resolve(null);
       };
@@ -226,19 +238,17 @@
   }
 
   async function loadAllFrames() {
-    // 1. Instant First Frame
+    if (!canvas) return;
     await loadImage(1);
 
-    // 2. High-priority Initial Chunk (frames 2 to 24)
     const priorityChunk = [];
-    for (let i = 2; i <= Math.min(24, TOTAL_FRAMES); i++) {
+    for (let i = 2; i <= Math.min(20, TOTAL_FRAMES); i++) {
       priorityChunk.push(loadImage(i));
     }
     await Promise.all(priorityChunk);
 
-    // 3. Progressive Background Queue (frames 25 to 240) in throttled concurrent pools
     const remainingIndices = [];
-    for (let i = 25; i <= TOTAL_FRAMES; i++) {
+    for (let i = 21; i <= TOTAL_FRAMES; i++) {
       remainingIndices.push(i);
     }
 
@@ -258,40 +268,19 @@
   }
 
   // ==========================================
-  // 6. SERVICES ACCORDION INTERACTION
-  // ==========================================
-  function initAccordion() {
-    accordionItems.forEach((item) => {
-      item.addEventListener('click', () => {
-        const isAlreadyActive = item.classList.contains('active');
-
-        // Close all items
-        accordionItems.forEach((other) => other.classList.remove('active'));
-
-        // If clicked item wasn't active, activate it
-        if (!isAlreadyActive) {
-          item.classList.add('active');
-        }
-      });
-    });
-  }
-
-  // ==========================================
-  // 7. SMOOTH NAVIGATION & UTILITIES
+  // 6. NAVIGATION & MOBILE DRAWER
   // ==========================================
   function initNavigation() {
-    // Back to top
     if (backToTopBtn) {
       backToTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
 
-    // Mobile Navigation Drawer Controller
     function toggleMobileMenu(forceState) {
       if (!navMenu) return;
       const isOpen = forceState !== undefined ? forceState : !navMenu.classList.contains('open');
-      
+
       navMenu.classList.toggle('open', isOpen);
       if (menuToggle) {
         menuToggle.classList.toggle('open', isOpen);
@@ -318,14 +307,10 @@
       mobileBackdrop.addEventListener('click', () => toggleMobileMenu(false));
     }
 
-    // Close mobile menu on link click
     navLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        toggleMobileMenu(false);
-      });
+      link.addEventListener('click', () => toggleMobileMenu(false));
     });
 
-    // Close on Escape key
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && navMenu && navMenu.classList.contains('open')) {
         toggleMobileMenu(false);
@@ -334,10 +319,9 @@
   }
 
   // ==========================================
-  // 8. PORTFOLIO FILTERING, HOVER PREVIEWS & MODAL
+  // 7. PORTFOLIO FILTERING & VIDEO MODAL
   // ==========================================
   function initPortfolio() {
-    // Category Filtering
     const filterBtns = document.querySelectorAll('.filter-btn');
     const workCards = document.querySelectorAll('.work-item');
 
@@ -359,28 +343,7 @@
       });
     });
 
-    // Muted Live Video Preview on Card Hover
-    document.querySelectorAll('.project-media-wrap[data-type="video"]').forEach((wrap) => {
-      const cardVideo = wrap.querySelector('video');
-      if (!cardVideo) return;
-
-      wrap.addEventListener('mouseenter', () => {
-        cardVideo.currentTime = 0;
-        const playPromise = cardVideo.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(() => {
-            // Autoplay prevented or aborted
-          });
-        }
-      });
-
-      wrap.addEventListener('mouseleave', () => {
-        cardVideo.pause();
-        cardVideo.currentTime = 0;
-      });
-    });
-
-    // Cinematic Lightbox Modal
+    // Modal Player
     const modal = document.getElementById('media-modal');
     const modalTitle = document.getElementById('modal-media-title');
     const modalContainer = document.getElementById('modal-media-container');
@@ -390,7 +353,7 @@
       if (!modal || !modalContainer) return;
 
       modalContainer.innerHTML = '';
-      modalTitle.textContent = title || 'Cinematic Showcase';
+      modalTitle.textContent = title || 'CineAddict Film Showcase';
 
       if (type === 'video') {
         const video = document.createElement('video');
@@ -404,7 +367,7 @@
         const img = document.createElement('img');
         img.className = 'modal-image-view';
         img.src = src;
-        img.alt = title || 'Photography Work';
+        img.alt = title || 'Photography Frame';
         modalContainer.appendChild(img);
       }
 
@@ -417,7 +380,7 @@
       modal.classList.remove('open');
       document.body.style.overflow = '';
       if (modalContainer) {
-        modalContainer.innerHTML = ''; // Stops audio and video playback
+        modalContainer.innerHTML = '';
       }
     }
 
@@ -439,59 +402,117 @@
       }
     });
 
-    // Card Trigger Clicks
-    document.querySelectorAll('.project-media-wrap').forEach((wrap) => {
+    // Attach click triggers to all cards and featured video
+    document.querySelectorAll('.project-media-wrap, .featured-video-wrap').forEach((wrap) => {
       wrap.addEventListener('click', () => {
         const src = wrap.getAttribute('data-src');
         const title = wrap.getAttribute('data-title');
-        const type = wrap.getAttribute('data-type');
+        const type = wrap.getAttribute('data-type') || 'video';
         openModal(src, title, type);
       });
     });
 
-    document.querySelectorAll('.play-action-btn').forEach((btn) => {
+    document.querySelectorAll('.play-action-btn, .btn-watch-film, .featured-play-center').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const wrap = btn.closest('.project-media-wrap');
+        const wrap = btn.closest('.project-media-wrap, .featured-video-wrap');
         if (wrap) {
           const src = wrap.getAttribute('data-src');
           const title = wrap.getAttribute('data-title');
-          const type = wrap.getAttribute('data-type');
+          const type = wrap.getAttribute('data-type') || 'video';
           openModal(src, title, type);
         }
       });
     });
-
-    document.querySelectorAll('.project-play-pill').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const src = btn.getAttribute('data-src');
-        const title = btn.getAttribute('data-title');
-        const isPhoto = src.endsWith('.jpg') || src.endsWith('.png');
-        openModal(src, title, isPhoto ? 'image' : 'video');
-      });
-    });
-
-    // Hero Showreel Button trigger
-    const heroShowreelBtn = document.querySelector('.hero-actions-row .btn-primary-gold');
-    if (heroShowreelBtn) {
-      heroShowreelBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal('Ditya 00.mp4', 'Ditya Turns One — 1st Birthday Cinematic Celebration', 'video');
-      });
-    }
   }
 
   // ==========================================
-  // 9. BOOTSTRAP
+  // 8. FAQ ACCORDION
+  // ==========================================
+  function initFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach((item) => {
+      const questionBtn = item.querySelector('.faq-question-btn');
+      const panel = item.querySelector('.faq-answer-panel');
+
+      if (!questionBtn || !panel) return;
+
+      questionBtn.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+
+        // Close all items
+        faqItems.forEach((other) => {
+          other.classList.remove('active');
+          const otherBtn = other.querySelector('.faq-question-btn');
+          const otherPanel = other.querySelector('.faq-answer-panel');
+          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          if (otherPanel) otherPanel.style.maxHeight = null;
+        });
+
+        // Toggle clicked
+        if (!isActive) {
+          item.classList.add('active');
+          questionBtn.setAttribute('aria-expanded', 'true');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+      });
+    });
+  }
+
+  // ==========================================
+  // 9. WHATSAPP & BOOKING FORM CONVERSION ENGINE
+  // ==========================================
+  function initEnquiryForm() {
+    const form = document.getElementById('wedding-enquiry-form');
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('form-name')?.value.trim() || '';
+      const partner = document.getElementById('form-partner-name')?.value.trim() || '';
+      const date = document.getElementById('form-date')?.value || '';
+      const location = document.getElementById('form-location')?.value.trim() || '';
+      const events = document.getElementById('form-events')?.value.trim() || 'Wedding Celebrations';
+      const whatsapp = document.getElementById('form-whatsapp')?.value.trim() || '';
+      const service = document.getElementById('form-service')?.value || 'Photography + Film';
+
+      // Build High-Conversion WhatsApp Pre-filled message
+      const message = `Hello CineAddict Studios!\n\nI would like to check availability for our wedding date:\n• Couple: ${name} & ${partner}\n• Date: ${date}\n• Location: ${location}\n• Events Planned: ${events}\n• Looking For: ${service}\n• Contact: ${whatsapp}\n\nWe love your cinematic storytelling and would love to hear back!`;
+
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${CINEADDICT_WHATSAPP}?text=${encodedMessage}`;
+
+      // Open WhatsApp chat directly
+      window.open(whatsappUrl, '_blank');
+
+      // Visual success confirmation on button
+      const submitBtn = document.getElementById('submit-enquiry-btn');
+      if (submitBtn) {
+        const originalHtml = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span>REDIRECTING TO WHATSAPP... ✓</span>';
+        setTimeout(() => {
+          submitBtn.innerHTML = originalHtml;
+          form.reset();
+        }, 4000);
+      }
+    });
+  }
+
+  // ==========================================
+  // 10. BOOTSTRAP
   // ==========================================
   function init() {
     resizeCanvas();
-    initAccordion();
     initNavigation();
     initPortfolio();
-    requestAnimationFrame(updateAnimation);
-    loadAllFrames();
+    initFAQ();
+    initEnquiryForm();
+    if (ctx) {
+      requestAnimationFrame(updateAnimation);
+      loadAllFrames();
+    }
     onScroll();
   }
 
